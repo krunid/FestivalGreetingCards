@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>การ์ดอวยพรเทศกาลต่างๆ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
             font-family: 'Prompt', 'Sarabun', sans-serif;
@@ -121,49 +118,6 @@
             margin-bottom: 15px;
         }
 
-        .save-button, .copy-button {
-            position: absolute;
-            padding: 8px 15px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        
-        .save-button {
-            bottom: 15px;
-            left: 15px;
-            background-color: #4CAF50;
-        }
-        
-        .copy-button {
-            bottom: 15px;
-            right: 15px;
-            background-color: #2196F3;
-        }
-        
-        .save-button:hover, .copy-button:hover {
-            transform: translateY(-2px);
-        }
-        
-        .save-button:hover {
-            background-color: #45a049;
-        }
-        
-        .copy-button:hover {
-            background-color: #0b7dda;
-        }
-        
-        .save-button i, .copy-button i {
-            margin-right: 5px;
-        }
-
         .footer {
             width: 100%;
             background-color: rgba(119, 161, 211, 0.8);
@@ -217,23 +171,11 @@
                     <div class="fest-icon">💦</div>
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันสงกรานต์', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันสงกรานต์', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg" alt="สงกรานต์" class="card-image">
                     <h2>สวัสดีปีใหม่ไทย</h2>
                     <p>ขออำนาจคุณพระศรีรัตนตรัย และสิ่งศักดิ์สิทธิ์ทั้งหลาย จงดลบันดาลให้ท่านและครอบครัวประสบแต่ความสุข ความเจริญ มีสุขภาพแข็งแรง และโชคดีตลอดปี</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันสงกรานต์-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันสงกรานต์-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -246,23 +188,11 @@
                     <div class="fest-icon">🎆</div>
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
-                    <button class="save-button" onclick="saveCardAsImage('สวัสดีปีใหม่', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สวัสดีปีใหม่', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://i.pinimg.com/originals/6f/79/d2/6f79d255d996362dbac7ea4a486f8473.jpg" alt="ปีใหม่" class="card-image">
                     <h2>Happy New Year 2025</h2>
                     <p>ขออวยพรให้ปีใหม่นี้ เป็นปีแห่งความสุข ความสำเร็จ และสิ่งดีๆ เข้ามาในชีวิต พบเจอแต่สิ่งที่ดี มีสุขภาพแข็งแรง และมีความสุขตลอดปี</p>
-                    <button class="save-button" onclick="saveCardAsImage('สวัสดีปีใหม่-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สวัสดีปีใหม่-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -275,23 +205,11 @@
                     <div class="fest-icon">🏮</div>
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันลอยกระทง', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันลอยกระทง', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://i.pinimg.com/originals/4f/c2/da/4fc2da8f1d4c37d0e97aa7c9252c92ea.gif" alt="ลอยกระทง" class="card-image">
                     <h2>ลอยกระทงประเพณีไทย</h2>
                     <p>ในวันเพ็ญเดือนสิบสองนี้ ขอให้สิ่งไม่ดีลอยไปกับสายน้ำ พบเจอแต่สิ่งดีๆ และความสุขเข้ามาในชีวิต ขอให้ท่านมีความสุขในวันลอยกระทง</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันลอยกระทง-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันลอยกระทง-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -304,23 +222,11 @@
                     <div class="fest-icon">🎄</div>
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
-                    <button class="save-button" onclick="saveCardAsImage('Merry Christmas', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('Merry Christmas', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg" alt="คริสต์มาส" class="card-image">
                     <h2>สุขสันต์วันคริสต์มาส</h2>
                     <p>ขอให้คริสต์มาสปีนี้ เป็นวันที่เต็มไปด้วยความสุข ความอบอุ่น และความรัก ขอให้ซานต้านำของขวัญแห่งความสุขมามอบให้ และพบแต่สิ่งดีๆ ในปีใหม่ที่กำลังจะมาถึง</p>
-                    <button class="save-button" onclick="saveCardAsImage('Merry Christmas-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('Merry Christmas-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -333,23 +239,11 @@
                     <div class="fest-icon">🧧</div>
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันตรุษจีน', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันตรุษจีน', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg" alt="ตรุษจีน" class="card-image">
                     <h2>ซินเจียยู่อี่ ซินนี้ฮวดไช้</h2>
                     <p>ขอให้มั่งมีศรีสุข รวยเงินรวยทอง สุขภาพแข็งแรง อายุยืนยาว และมีความสุขตลอดปี ขอให้ปีนี้เป็นปีมังกรทองที่นำโชคลาภและความสำเร็จมาสู่ท่าน</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันตรุษจีน-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันตรุษจีน-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -362,23 +256,11 @@
                     <div class="fest-icon">🎂</div>
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันเกิด', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันเกิด', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
                 <div class="card-back">
                     <img src="https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg" alt="วันเกิด" class="card-image">
                     <h2>ขอให้วันเกิดเป็นวันพิเศษ</h2>
                     <p>ขออวยพรให้มีความสุขมากๆ ในวันพิเศษของคุณ ขอให้ชีวิตเต็มไปด้วยความสุข ความสำเร็จ มีสุขภาพแข็งแรง และสมปรารถนาในทุกสิ่งที่หวัง</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันเกิด-back', this)">
-                        <i class="fas fa-download"></i> บันทึก
-                    </button>
-                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันเกิด-back', this)">
-                        <i class="fas fa-copy"></i> คัดลอก
-                    </button>
                 </div>
             </div>
         </div>
@@ -400,7 +282,7 @@
                 // เมื่อรูปภาพโหลดไม่ได้ ให้ใช้สีพื้นหลังแทน
                 img.onerror = function() {
                     console.log('ไม่สามารถโหลดรูปภาพได้:', img.src);
-                    const cardFront = img.closest('.card-front, .card-back');
+                    const cardSide = img.closest('.card-front, .card-back');
                     img.style.display = 'none'; // ซ่อนรูปที่โหลดไม่ได้
                 };
             });
@@ -409,122 +291,11 @@
         // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // ถ้าคลิกที่ปุ่มหรือไอคอน ไม่ต้องพลิกการ์ด
-                if (e.target.classList.contains('save-button') || 
-                    e.target.classList.contains('copy-button') ||
-                    e.target.parentElement.classList.contains('save-button') ||
-                    e.target.parentElement.classList.contains('copy-button') ||
-                    e.target.tagName === 'I') {
-                    return;
-                }
-                
                 // สลับคลาส flipped เพื่อพลิกการ์ด
                 const cardInner = card.querySelector('.card-inner');
                 cardInner.classList.toggle('flipped');
             });
         });
-
-        // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
-        function saveCardAsImage(cardType, element) {
-            // ใช้การเลือกการ์ดที่ถูกคลิกอย่างเฉพาะเจาะจง
-            const cardFront = element.closest('.card-front, .card-back');
-            
-            // ตั้งค่าสำหรับการบันทึกภาพ
-            const options = {
-                backgroundColor: null, // พื้นหลังโปร่งใส
-                scale: 2,             // เพิ่มความละเอียด
-                useCORS: true,        // อนุญาตให้ใช้รูปจาก domain อื่น
-                allowTaint: true      // อนุญาตให้ใช้รูปที่อาจถูกบล็อก
-            };
-            
-            html2canvas(cardFront, options).then(canvas => {
-                // สร้าง URL และลิงค์สำหรับดาวน์โหลด
-                const imgData = canvas.toDataURL('image/png');
-                const link = document.createElement('a');
-                link.href = imgData;
-                link.download = `card_${cardType.replace(/\s+/g, '_').toLowerCase()}.png`;
-                
-                // ทำการดาวน์โหลด
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                // แสดงข้อความยืนยัน
-                Swal.fire({
-                    title: 'บันทึกการ์ดสำเร็จ',
-                    text: `บันทึกการ์ด ${cardType} เรียบร้อยแล้ว`,
-                    icon: 'success',
-                    timer: 2000,
-                    showConfirmButton: false
-                });
-            }).catch(error => {
-                console.error('เกิดข้อผิดพลาดในการบันทึกการ์ด:', error);
-                
-                // แสดงข้อความแจ้งเตือนเมื่อเกิดข้อผิดพลาด
-                Swal.fire({
-                    title: 'ไม่สามารถบันทึกการ์ดได้',
-                    text: 'โปรดลองใช้ปุ่ม Print Screen บนคีย์บอร์ดแทน',
-                    icon: 'error',
-                    confirmButtonText: 'ตกลง'
-                });
-            });
-        }
-
-        // ฟังก์ชันคัดลอกการ์ดไปยังคลิปบอร์ด
-        function copyCardToClipboard(cardType, element) {
-            // ใช้การเลือกการ์ดที่ถูกคลิกอย่างเฉพาะเจาะจง
-            const cardFront = element.closest('.card-front, .card-back');
-            
-            // ตั้งค่าสำหรับการสร้างภาพ
-            const options = {
-                backgroundColor: null,
-                scale: 2,
-                useCORS: true,
-                allowTaint: true
-            };
-            
-            html2canvas(cardFront, options).then(canvas => {
-                canvas.toBlob(function(blob) {
-                    try {
-                        // สร้าง ClipboardItem และคัดลอกไปยังคลิปบอร์ด
-                        const item = new ClipboardItem({ "image/png": blob });
-                        navigator.clipboard.write([item]).then(function() {
-                            // แสดงข้อความยืนยัน
-                            Swal.fire({
-                                title: 'คัดลอกสำเร็จ',
-                                text: `คัดลอกการ์ด ${cardType} ไปยังคลิปบอร์ดแล้ว`,
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        }, function(error) {
-                            console.error('ไม่สามารถคัดลอกได้:', error);
-                            showFallbackCopyDialog(canvas);
-                        });
-                    } catch (error) {
-                        console.error('ไม่รองรับการคัดลอกรูปภาพ:', error);
-                        showFallbackCopyDialog(canvas);
-                    }
-                });
-            });
-        }
-        
-        // แสดงวิธีคัดลอกแบบทางเลือกเมื่อไม่สามารถคัดลอกโดยตรงได้
-        function showFallbackCopyDialog(canvas) {
-            // สร้าง URL ของรูปภาพ
-            const imageUrl = canvas.toDataURL('image/png');
-            
-            // แสดงหน้าต่างที่มีรูปภาพและคำแนะนำ
-            Swal.fire({
-                title: 'คัดลอกด้วยตนเอง',
-                html: `
-                    <p>โปรดคลิกขวาที่รูปภาพและเลือก "คัดลอกรูปภาพ" หรือกด Print Screen บนคีย์บอร์ด</p>
-                    <img src="${imageUrl}" alt="การ์ด" style="max-width: 100%; margin-top: 10px;">
-                `,
-                icon: 'info',
-                confirmButtonText: 'ตกลง'
-            });
-        }
     </script>
 </body>
 </html>
