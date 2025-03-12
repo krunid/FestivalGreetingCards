@@ -96,7 +96,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4); /* เพิ่มความเข้มของเลเยอร์ */
             z-index: 0;
         }
 
@@ -131,6 +131,7 @@
             object-fit: cover;
             border-radius: 15px;
             z-index: -1;
+            display: block; /* ให้แสดงผลเป็น block */
         }
 
         /* สีการ์ดแต่ละประเภท */
@@ -269,53 +270,30 @@
             background-color: #E684AE !important;
         }
         
-        /* สไตล์ปุ่มแชร์ */
-        .share-btn, .download-btn {
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .share-btn:hover, .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        
-        .share-btn span, .download-btn span {
-            margin-top: 5px;
-            font-size: 12px;
-        }/* สีปุ่มแชร์ */
-        .facebook {
-            background-color: #E684AE;
-            color: white;
-        }
-        
-        .twitter {
-            background-color: #79CBCA;
-            color: white;
-        }
-        
-        .line {
-            background-color: #77A1D3;
-            color: white;
-        }
-        
-        .email {
-            background-color: #E684AE;
-            color: white;
-        }
-        
+        /* สไตล์ปุ่มดาวน์โหลด */
         .download-btn {
             background-color: #79CBCA;
             color: white;
+            border: none;
+            border-radius: 5px;
             padding: 10px 20px;
             margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .download-btn:hover {
+            background-color: #E684AE;
+            transform: translateY(-2px);
+        }
+
+        .download-btn i {
+            margin-right: 5px;
         }
         
         /* สไตล์การแสดงผลบนอุปกรณ์ขนาดเล็ก */
@@ -344,8 +322,36 @@
         .card-active {
             z-index: 10;
         }
+
+        /* สไตล์ของปุ่ม Telegram */
+        .telegram-btn {
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .telegram-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        .telegram-btn i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
     </style>
-</head><body>
+</head>
+<body>
     <h1>การ์ดอวยพรตามเทศกาลต่างๆ</h1>
     <p style="color: white; text-align: center; margin-bottom: 20px;">กดที่การ์ดเพื่อดูข้อความอวยพร</p>
     
@@ -358,8 +364,8 @@
                     <div class="festival-icon">💦</div>
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
-                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันสงกรานต์', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันสงกรานต์', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -377,8 +383,8 @@
                     <div class="festival-icon">🎆</div>
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
-                    <button class="send-button" onclick="showShareOptions('สวัสดีปีใหม่', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สวัสดีปีใหม่', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -386,7 +392,9 @@
                     <p>ขออวยพรให้ปีใหม่นี้ เป็นปีแห่งความสุข ความสำเร็จ และสิ่งดีๆ เข้ามาในชีวิต พบเจอแต่สิ่งที่ดี มีสุขภาพแข็งแรง และมีความสุขตลอดปี</p>
                 </div>
             </div>
-        </div><!-- ลอยกระทง -->
+        </div>
+
+        <!-- ลอยกระทง -->
         <div class="card loykrathong">
             <div class="card-inner">
                 <div class="card-front">
@@ -394,8 +402,8 @@
                     <div class="festival-icon">🏮</div>
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
-                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันลอยกระทง', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันลอยกระทง', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -413,8 +421,8 @@
                     <div class="festival-icon">🎄</div>
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
-                    <button class="send-button" onclick="showShareOptions('Merry Christmas', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('Merry Christmas', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -422,7 +430,9 @@
                     <p>ขอให้คริสต์มาสปีนี้ เป็นวันที่เต็มไปด้วยความสุข ความอบอุ่น และความรัก ขอให้ซานต้านำของขวัญแห่งความสุขมามอบให้ และพบแต่สิ่งดีๆ ในปีใหม่ที่กำลังจะมาถึง</p>
                 </div>
             </div>
-        </div><!-- ตรุษจีน -->
+        </div>
+
+        <!-- ตรุษจีน -->
         <div class="card chinesenewyear">
             <div class="card-inner">
                 <div class="card-front">
@@ -430,8 +440,8 @@
                     <div class="festival-icon">🧧</div>
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
-                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันตรุษจีน', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันตรุษจีน', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -449,8 +459,8 @@
                     <div class="festival-icon">🎂</div>
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
-                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันเกิด', this.parentElement)">
-                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันเกิด', this.parentElement)">
+                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -465,7 +475,9 @@
         <p>© 2025 การ์ดอวยพรเทศกาลไทย</p>
         <p>ออกแบบโดย: ทีมไทยการ์ด</p>
         <p>ติดต่อ: contact@thaicard.com</p>
-    </footer><script>
+    </footer>
+
+    <script>
         // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
@@ -476,36 +488,36 @@
                     return;
                 }
                 
-                // สลับสถานะการพลิกของการ์ด
+                // สลับสถานะการพลิกของการ์ดโดยไม่เปลี่ยนตำแหน่ง
                 const cardInner = card.querySelector('.card-inner');
                 const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
                 
-                // ถ้าการ์ดยังไม่ถูกพลิก ให้เลื่อนขึ้นมาด้านบน
                 if (!isFlipped) {
-                    card.classList.add('card-active');
+                    // ไม่เพิ่มคลาส card-active เพื่อไม่ให้การ์ดเลื่อนขึ้นด้านบน
                     cardInner.style.transform = 'rotateY(180deg)';
                 } else {
-                    card.classList.remove('card-active');
                     cardInner.style.transform = 'rotateY(0deg)';
                 }
             });
-        });// ฟังก์ชันส่งการ์ดไปยัง Telegram
-        function sendToTelegram(cardType) {
+        });
+
+        // ฟังก์ชันส่งการ์ดไปยัง Telegram
+        function sendToTelegram(cardType, cardElement) {
             // ดึงข้อมูลจาก localStorage หรือใช้ค่าเริ่มต้น
-            let username = localStorage.getItem('telegram_username') || '';
+            let chatId = localStorage.getItem('telegram_chat_id') || '';
             let recipient = localStorage.getItem('recipient_name') || '';
             
             // แสดง Modal สำหรับกรอกข้อมูล
             Swal.fire({
-                title: 'ส่งการ์ด ' + cardType,
+                title: 'ส่งการ์ด ' + cardType + ' ผ่าน Telegram',
                 html: `
                     <div class="form-group">
                         <label for="recipient">ชื่อผู้รับ</label>
                         <input type="text" id="recipient" class="swal2-input" placeholder="ชื่อผู้รับ" value="${recipient}">
                     </div>
                     <div class="form-group">
-                        <label for="username">Telegram Username</label>
-                        <input type="text" id="username" class="swal2-input" placeholder="@username" value="${username}">
+                        <label for="chat_id">Telegram Chat ID หรือชื่อห้อง</label>
+                        <input type="text" id="chat_id" class="swal2-input" placeholder="ระบุ Chat ID หรือชื่อห้อง" value="${chatId}">
                     </div>
                     <div class="form-group">
                         <label for="message">ข้อความเพิ่มเติม</label>
@@ -517,25 +529,29 @@
                 cancelButtonText: 'ยกเลิก',
                 preConfirm: () => {
                     const recipientValue = document.getElementById('recipient').value;
-                    const usernameValue = document.getElementById('username').value;
+                    const chatIdValue = document.getElementById('chat_id').value;
                     const messageValue = document.getElementById('message').value;
                     
                     // บันทึกข้อมูลลง localStorage เพื่อใช้ครั้งต่อไป
                     localStorage.setItem('recipient_name', recipientValue);
-                    localStorage.setItem('telegram_username', usernameValue);
+                    localStorage.setItem('telegram_chat_id', chatIdValue);
                     
                     return { 
                         recipient: recipientValue,
-                        username: usernameValue,
+                        chatId: chatIdValue,
                         message: messageValue
                     };
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // ถ้าผู้ใช้กรอก username แต่ไม่มี @ ให้เพิ่มให้
-                    let username = result.value.username;
-                    if (username && !username.startsWith('@')) {
-                        username = '@' + username;
+                    // ตรวจสอบว่ามีการระบุ Chat ID หรือไม่
+                    if (!result.value.chatId) {
+                        Swal.fire({
+                            title: 'ข้อมูลไม่ครบถ้วน',
+                            text: 'กรุณาระบุ Telegram Chat ID หรือชื่อห้อง',
+                            icon: 'error'
+                        });
+                        return;
                     }
                     
                     // สร้างข้อความสำหรับส่ง
@@ -552,14 +568,13 @@
                     const encodedText = encodeURIComponent(textToSend);
                     
                     // สร้าง URL สำหรับส่ง
-                    let url;
-                    if (username) {
-                        // ถ้ามี username ให้ส่งตรงไปที่ผู้ใช้
-                        url = `https://t.me/${username.replace('@', '')}?text=${encodedText}`;
-                    } else {
-                        // ถ้าไม่มี username ให้แชร์ผ่าน share URL
-                        url = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodedText}`;
+                    let chatId = result.value.chatId;
+                    // ตัด @ ออกถ้ามี
+                    if (chatId.startsWith('@')) {
+                        chatId = chatId.substring(1);
                     }
+                    
+                    const url = `https://t.me/${chatId}?text=${encodedText}`;
                     
                     // เปิดหน้าต่างใหม่
                     window.open(url, '_blank');
@@ -567,14 +582,16 @@
                     // แสดง notification ว่าส่งสำเร็จ
                     Swal.fire({
                         title: 'ส่งการ์ดสำเร็จ',
-                        text: `การ์ด ${cardType} ถูกส่งไปยัง Telegram แล้ว`,
+                        text: `การ์ด ${cardType} ถูกส่งไปยัง Telegram ห้อง ${result.value.chatId} แล้ว`,
                         icon: 'success',
                         timer: 2000,
                         showConfirmButton: false
                     });
                 }
             });
-        }// ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
+        }
+
+        // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
         function saveCardAsImage(cardType, cardElement) {
             html2canvas(cardElement).then(canvas => {
                 // สร้าง URL สำหรับรูปภาพ
@@ -589,71 +606,6 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-            });
-        }
-        
-        // ฟังก์ชันแชร์การ์ดผ่านโซเชียลมีเดีย
-        function shareCard(cardType, platform) {
-            const text = encodeURIComponent(`ฉันส่งการ์ดอวยพร "${cardType}" มาให้คุณ 🎉`);
-            const url = encodeURIComponent(window.location.href);
-            let shareUrl = '';
-            
-            switch(platform) {
-                case 'facebook':
-                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
-                    break;
-                case 'twitter':
-                    shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-                    break;
-                case 'line':
-                    shareUrl = `https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`;
-                    break;
-                case 'email':
-                    shareUrl = `mailto:?subject=${encodeURIComponent('การ์ดอวยพร ' + cardType)}&body=${text}%0A%0A${url}`;
-                    break;
-            }
-            
-            if (shareUrl) {
-                window.open(shareUrl, '_blank');
-            }
-        }// ฟังก์ชันแสดงเมนูตัวเลือกการแชร์
-        function showShareOptions(cardType, cardElement) {
-            Swal.fire({
-                title: 'แชร์การ์ด ' + cardType,
-                html: `
-                    <div style="display: flex; justify-content: space-around; gap: 10px; margin-bottom: 20px;">
-                        <button class="share-btn facebook" onclick="shareCard('${cardType}', 'facebook')">
-                            <i class="fab fa-facebook-f" style="font-size: 24px; color: white;"></i>
-                            <span>Facebook</span>
-                        </button>
-                        <button class="share-btn twitter" onclick="shareCard('${cardType}', 'twitter')">
-                            <i class="fab fa-twitter" style="font-size: 24px; color: white;"></i>
-                            <span>Twitter</span>
-                        </button>
-                        <button class="share-btn line" onclick="shareCard('${cardType}', 'line')">
-                            <i class="fab fa-line" style="font-size: 24px; color: white;"></i>
-                            <span>Line</span>
-                        </button>
-                        <button class="share-btn email" onclick="shareCard('${cardType}', 'email')">
-                            <i class="fas fa-envelope" style="font-size: 24px; color: white;"></i>
-                            <span>Email</span>
-                        </button>
-                    </div>
-                    <div>
-                        <button class="download-btn" onclick="saveCardAsImage('${cardType}', document.querySelector('.${cardType.toLowerCase().replace(/\s+/g, '')} .card-front'))">
-                            <i class="fas fa-download" style="font-size: 20px; color: white;"></i>
-                            <span>บันทึกเป็นรูปภาพ</span>
-                        </button>
-                    </div>
-                `,
-                showCancelButton: true,
-                confirmButtonText: 'ส่งผ่าน Telegram',
-                cancelButtonText: 'ปิด',
-                showCloseButton: true
-            }).then(result => {
-                if (result.isConfirmed) {
-                    sendToTelegram(cardType);
-                }
             });
         }
     </script>
