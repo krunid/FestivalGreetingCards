@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>การ์ดอวยพรเทศกาลต่างๆ</title>
-    <!-- เพิ่ม Font Awesome สำหรับไอคอน -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- ลิงก์ SweetAlert2 สำหรับแสดงป๊อปอัพสวยงาม -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.all.min.js"></script>
-    <!-- ลิงก์ html2canvas สำหรับแปลงการ์ดเป็นรูปภาพ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
@@ -31,7 +28,6 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
-        /* กำหนดการวางการ์ดและระยะห่าง */
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -41,40 +37,36 @@
             padding: 20px 0;
         }
 
-        /* กำหนดขนาดและคุณสมบัติการพลิกของการ์ด */
         .card {
             width: 300px;
             height: 400px;
-            perspective: 1000px; /* เพิ่มมุมมองในการพลิก */
+            perspective: 1000px;
             margin-bottom: 30px;
             position: relative;
         }
 
-        /* กำหนดรูปแบบภายในการ์ดและการพลิก */
         .card-inner {
             width: 100%;
             height: 100%;
             position: relative;
             text-align: center;
             transition: transform 0.8s;
-            transform-style: preserve-3d; /* ทำให้การพลิกเป็น 3D */
+            transform-style: preserve-3d;
             cursor: pointer;
         }
 
-        /* การพลิกการ์ด */
         .card-inner.flipped {
             transform: rotateY(180deg);
         }
 
-        /* กำหนดลักษณะร่วมของด้านหน้าและด้านหลัง */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            -webkit-backface-visibility: hidden; /* ซ่อนด้านหลังใน Safari */
-            backface-visibility: hidden; /* ซ่อนด้านหลังเมื่อพลิก */
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: flex;
@@ -85,17 +77,12 @@
             box-sizing: border-box;
         }
 
-        /* กำหนดสไตล์ด้านหน้าการ์ด */
         .card-front {
-            background-position: center;
-            background-size: cover;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            position: absolute;
             overflow: hidden;
         }
 
-        /* เพิ่มเลเยอร์สีทับภาพพื้นหลัง */
         .card-front::before {
             content: "";
             position: absolute;
@@ -103,60 +90,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5); /* เพิ่มความเข้มของเลเยอร์ */
-            z-index: 0;
-        }
-
-        /* ทำให้เนื้อหาอยู่ด้านบนเลเยอร์สี */
-        .card-front > * {
-            position: relative;
+            background: rgba(0,0,0,0.5);
             z-index: 1;
         }
 
-        /* กำหนดสไตล์ด้านหลังการ์ด */
+        .card-front > * {
+            position: relative;
+            z-index: 2;
+        }
+
         .card-back {
             background: linear-gradient(315deg, #E684AE 0%, #79CBCA 50%, #77A1D3 100%);
             color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-            transform: rotateY(180deg); /* พลิกด้านหลังไว้ล่วงหน้า */
+            transform: rotateY(180deg);
         }
 
-        /* เพิ่มสไตล์รูปภาพในการ์ด */
-        .card-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 15px;
-            z-index: -1;
-            display: block;
-        }
-
-        /* สไตล์หัวข้อและข้อความ */
-        h1, h2 {
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-        }
-        
-        p {
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        /* ไอคอนของแต่ละเทศกาล */
-        .festival-icon {
+        .fest-icon {
             font-size: 3rem;
             margin-bottom: 15px;
         }
 
-        /* สไตล์ปุ่มบันทึกการ์ด */
         .save-button {
             position: absolute;
             bottom: 15px;
             padding: 8px 15px;
-            background-color: #4CAF50; /* สีเขียว */
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -166,7 +125,7 @@
             font-size: 0.9rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            z-index: 2;
+            z-index: 10;
         }
         
         .save-button:hover {
@@ -177,8 +136,7 @@
         .save-button i {
             margin-right: 5px;
         }
-        
-        /* สไตล์ส่วนล่างของหน้า */
+
         .footer {
             width: 100%;
             background-color: rgba(119, 161, 211, 0.8);
@@ -192,34 +150,7 @@
         .footer p {
             margin: 5px 0;
         }
-        
-        /* สไตล์ฟอร์มในป๊อปอัพ */
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            text-align: left;
-        }
-        
-        .swal2-input, .swal2-textarea {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .swal2-textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        /* สไตล์การแสดงผลบนอุปกรณ์ขนาดเล็ก */
+
         @media (max-width: 768px) {
             .card {
                 width: 280px;
@@ -230,15 +161,19 @@
             .card-container {
                 gap: 40px;
             }
-            
-            .send-button {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .swal2-popup {
-                font-size: 14px;
-            }
+        }
+
+        /* สีพื้นหลังการ์ด */
+        .songkran-card, .newyear-card {
+            background-color: #E684AE;
+        }
+        
+        .loykrathong-card, .christmas-card {
+            background-color: #79CBCA;
+        }
+        
+        .chinesenewyear-card, .birthday-card {
+            background-color: #77A1D3;
         }
     </style>
 </head>
@@ -248,14 +183,13 @@
     
     <div class="card-container">
         <!-- สงกรานต์ -->
-        <div class="card songkran">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg" alt="สงกรานต์" class="card-image">
-                    <div class="festival-icon">💦</div>
+                <div class="card-front songkran-card">
+                    <div class="fest-icon">💦</div>
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันสงกรานต์', this.parentElement)">
+                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันสงกรานต์', this)">
                         <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
@@ -267,15 +201,14 @@
         </div>
 
         <!-- ปีใหม่ -->
-        <div class="card newyear">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://i.pinimg.com/originals/6f/79/d2/6f79d255d996362dbac7ea4a486f8473.jpg" alt="ปีใหม่" class="card-image">
-                    <div class="festival-icon">🎆</div>
+                <div class="card-front newyear-card">
+                    <div class="fest-icon">🎆</div>
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
-                    <button class="send-button" onclick="sendToTelegram('สวัสดีปีใหม่', this)">
-                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
+                    <button class="save-button" onclick="saveCardAsImage('สวัสดีปีใหม่', this)">
+                        <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
                 <div class="card-back">
@@ -286,14 +219,13 @@
         </div>
 
         <!-- ลอยกระทง -->
-        <div class="card loykrathong">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://i.pinimg.com/originals/4f/c2/da/4fc2da8f1d4c37d0e97aa7c9252c92ea.gif" alt="ลอยกระทง" class="card-image">
-                    <div class="festival-icon">🏮</div>
+                <div class="card-front loykrathong-card">
+                    <div class="fest-icon">🏮</div>
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันลอยกระทง', this.parentElement)">
+                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันลอยกระทง', this)">
                         <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
@@ -305,14 +237,13 @@
         </div>
         
         <!-- คริสต์มาส -->
-        <div class="card christmas">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg" alt="คริสต์มาส" class="card-image">
-                    <div class="festival-icon">🎄</div>
+                <div class="card-front christmas-card">
+                    <div class="fest-icon">🎄</div>
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
-                    <button class="save-button" onclick="saveCardAsImage('Merry Christmas', this.parentElement)">
+                    <button class="save-button" onclick="saveCardAsImage('Merry Christmas', this)">
                         <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
@@ -324,14 +255,13 @@
         </div>
 
         <!-- ตรุษจีน -->
-        <div class="card chinesenewyear">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg" alt="ตรุษจีน" class="card-image">
-                    <div class="festival-icon">🧧</div>
+                <div class="card-front chinesenewyear-card">
+                    <div class="fest-icon">🧧</div>
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันตรุษจีน', this.parentElement)">
+                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันตรุษจีน', this)">
                         <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
@@ -343,14 +273,13 @@
         </div>
 
         <!-- วันเกิด -->
-        <div class="card birthday">
+        <div class="card">
             <div class="card-inner">
-                <div class="card-front">
-                    <img src="https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg" alt="วันเกิด" class="card-image">
-                    <div class="festival-icon">🎂</div>
+                <div class="card-front birthday-card">
+                    <div class="fest-icon">🎂</div>
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
-                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันเกิด', this.parentElement)">
+                    <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันเกิด', this)">
                         <i class="fas fa-download"></i> บันทึกการ์ด
                     </button>
                 </div>
@@ -368,74 +297,47 @@
         <p>ติดต่อ: contact@thaicard.com</p>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
-        // เพิ่ม crossOrigin สำหรับรูปภาพทั้งหมดในหน้า (เพื่อให้บันทึกรูปภาพได้)
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.crossOrigin = "anonymous";
-                // เพิ่มการตรวจสอบการโหลดรูปภาพ
-                img.onerror = function() {
-                    console.error('ไม่สามารถโหลดรูปภาพได้:', img.src);
-                    // ใช้สีพื้นหลังแทนรูปภาพที่โหลดไม่ได้
-                    const card = img.closest('.card');
-                    if (card) {
-                        const cardFront = img.closest('.card-front');
-                        if (cardFront) {
-                            if (card.classList.contains('songkran') || card.classList.contains('newyear')) {
-                                cardFront.style.backgroundColor = '#E684AE';
-                            } else if (card.classList.contains('loykrathong') || card.classList.contains('christmas')) {
-                                cardFront.style.backgroundColor = '#79CBCA';
-                            } else if (card.classList.contains('chinesenewyear') || card.classList.contains('birthday')) {
-                                cardFront.style.backgroundColor = '#77A1D3';
-                            }
-                        }
-                    }
-                };
-            });
-        });
         // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // ถ้าคลิกที่ปุ่มบันทึกหรือรูปภาพในปุ่ม ไม่ต้องพลิกการ์ด
+                // ถ้าคลิกที่ปุ่มบันทึกหรือไอคอน ไม่ต้องพลิกการ์ด
                 if (e.target.classList.contains('save-button') || 
                     e.target.parentElement.classList.contains('save-button') ||
                     e.target.tagName === 'I') {
                     return;
                 }
                 
-                // สลับคลาส flipped เพื่อพลิกการ์ด (ในตำแหน่งเดิม)
+                // สลับคลาส flipped เพื่อพลิกการ์ด
                 const cardInner = card.querySelector('.card-inner');
                 cardInner.classList.toggle('flipped');
             });
         });
 
         // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
-        function saveCardAsImage(cardType, cardElement) {
-            // สำหรับการบันทึกภาพพร้อมรูปพื้นหลัง
+        function saveCardAsImage(cardType, element) {
+            // ใช้การเลือกการ์ดที่ถูกคลิกอย่างเฉพาะเจาะจง
+            const cardFront = element.closest('.card-front');
+            
+            // ตั้งค่าสำหรับการบันทึกภาพ
             const options = {
-                allowTaint: true,  // อนุญาตให้โหลดรูปภาพจากโดเมนอื่น
-                useCORS: true,     // ใช้ CORS เพื่อโหลดรูปภาพ
-                backgroundColor: null, // ตั้งค่าพื้นหลังให้โปร่งใส
-                scale: 2          // เพิ่มความละเอียดของรูปภาพ
+                backgroundColor: null, // พื้นหลังโปร่งใส
+                scale: 2              // เพิ่มความละเอียด
             };
             
-            html2canvas(cardElement, options).then(canvas => {
-                // สร้าง URL สำหรับรูปภาพ
+            html2canvas(cardFront, options).then(canvas => {
+                // สร้าง URL และลิงค์สำหรับดาวน์โหลด
                 const imgData = canvas.toDataURL('image/png');
-                
-                // สร้างลิงก์ดาวน์โหลด
                 const link = document.createElement('a');
                 link.href = imgData;
                 link.download = `card_${cardType.replace(/\s+/g, '_').toLowerCase()}.png`;
                 
-                // คลิกลิงก์เพื่อดาวน์โหลด
+                // ทำการดาวน์โหลด
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
-                // แสดง notification ว่าบันทึกสำเร็จ
+                // แสดงข้อความยืนยัน
                 Swal.fire({
                     title: 'บันทึกการ์ดสำเร็จ',
                     text: `บันทึกการ์ด ${cardType} เรียบร้อยแล้ว`,
