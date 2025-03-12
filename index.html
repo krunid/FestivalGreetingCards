@@ -367,7 +367,15 @@
         <p>ติดต่อ: contact@thaicard.com</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
+        // เพิ่ม crossOrigin สำหรับรูปภาพทั้งหมดในหน้า (เพื่อให้บันทึกรูปภาพได้)
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                img.crossOrigin = "anonymous";
+            });
+        });
         // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
@@ -386,7 +394,15 @@
 
         // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
         function saveCardAsImage(cardType, cardElement) {
-            html2canvas(cardElement).then(canvas => {
+            // สำหรับการบันทึกภาพพร้อมรูปพื้นหลัง
+            const options = {
+                allowTaint: true,  // อนุญาตให้โหลดรูปภาพจากโดเมนอื่น
+                useCORS: true,     // ใช้ CORS เพื่อโหลดรูปภาพ
+                backgroundColor: null, // ตั้งค่าพื้นหลังให้โปร่งใส
+                scale: 2          // เพิ่มความละเอียดของรูปภาพ
+            };
+            
+            html2canvas(cardElement, options).then(canvas => {
                 // สร้าง URL สำหรับรูปภาพ
                 const imgData = canvas.toDataURL('image/png');
                 
