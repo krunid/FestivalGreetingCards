@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>การ์ดอวยพรเทศกาลต่างๆ</title>
-    <!-- ลิงก์ SweetAlert2 CSS และ JS -->
+    <!-- เพิ่ม Font Awesome สำหรับไอคอน -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- ลิงก์ SweetAlert2 สำหรับแสดงป๊อปอัพสวยงาม -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.all.min.js"></script>
-    <!-- ลิงก์ html2canvas สำหรับบันทึกการ์ดเป็นรูปภาพ -->
+    <!-- ลิงก์ html2canvas สำหรับแปลงการ์ดเป็นรูปภาพ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         body {
@@ -23,9 +25,10 @@
         }
 
         h1 {
-            color: #333;
+            color: #fff;
             text-align: center;
             margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
         /* กำหนดการวางการ์ดและระยะห่าง */
@@ -36,6 +39,7 @@
             gap: 30px;
             max-width: 1200px;
             padding: 20px 0;
+            position: relative;
         }
 
         /* กำหนดขนาดและคุณสมบัติการพลิกของการ์ด */
@@ -74,14 +78,32 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-        }
-
-        /* กำหนดสไตล์ด้านหน้าการ์ด */
+        }/* กำหนดสไตล์ด้านหน้าการ์ด */
         .card-front {
             background-position: center;
             background-size: cover;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* เพิ่มเลเยอร์สีทับภาพพื้นหลัง */
+        .card-front::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            z-index: 0;
+        }
+
+        /* ทำให้เนื้อหาอยู่ด้านบนเลเยอร์สี */
+        .card-front > * {
+            position: relative;
+            z-index: 1;
         }
 
         /* กำหนดสไตล์ด้านหลังการ์ด */
@@ -99,44 +121,48 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
+        /* เพิ่มสไตล์รูปภาพในการ์ด */
+        .card-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            z-index: -1;
+        }
+
         /* สีการ์ดแต่ละประเภท */
         /* สงกรานต์ */
         .songkran .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg');
             background-color: #E684AE;
         }
 
         /* ปีใหม่ */
         .newyear .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.pinimg.com/originals/6f/79/d2/6f79d255d996362dbac7ea4a486f8473.jpg');
             background-color: #E684AE;
         }
 
         /* ลอยกระทง */
         .loykrathong .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.pinimg.com/originals/4f/c2/da/4fc2da8f1d4c37d0e97aa7c9252c92ea.gif');
             background-color: #79CBCA;
         }
 
         /* คริสต์มาส */
         .christmas .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg');
             background-color: #79CBCA;
         }
 
         /* ตรุษจีน */
         .chinesenewyear .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg'); 
             background-color: #77A1D3;
         }
 
         /* วันเกิด */
         .birthday .card-front {
-            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg');
             background-color: #77A1D3;
-        }
-
-        /* สไตล์หัวข้อและข้อความ */
+        }/* สไตล์หัวข้อและข้อความ */
         h1, h2 {
             color: #fff;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -195,9 +221,7 @@
         
         .footer p {
             margin: 5px 0;
-        }
-        
-        /* สไตล์ฟอร์มในป๊อปอัพ */
+        }/* สไตล์ฟอร์มในป๊อปอัพ */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -266,9 +290,7 @@
         .share-btn span, .download-btn span {
             margin-top: 5px;
             font-size: 12px;
-        }
-        
-        /* สีปุ่มแชร์ */
+        }/* สีปุ่มแชร์ */
         .facebook {
             background-color: #E684AE;
             color: white;
@@ -326,13 +348,14 @@
 </head>
 <body>
     <h1>การ์ดอวยพรตามเทศกาลต่างๆ</h1>
-    <p>กดที่การ์ดเพื่อดูข้อความอวยพร</p>
+    <p style="color: white; text-align: center; margin-bottom: 20px;">กดที่การ์ดเพื่อดูข้อความอวยพร</p>
     
     <div class="card-container">
         <!-- สงกรานต์ -->
         <div class="card songkran">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg" alt="สงกรานต์" class="card-image">
                     <div class="festival-icon">💦</div>
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
@@ -351,6 +374,7 @@
         <div class="card newyear">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://i.pinimg.com/originals/6f/79/d2/6f79d255d996362dbac7ea4a486f8473.jpg" alt="ปีใหม่" class="card-image">
                     <div class="festival-icon">🎆</div>
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
@@ -364,11 +388,11 @@
                 </div>
             </div>
         </div>
-
         <!-- ลอยกระทง -->
         <div class="card loykrathong">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://i.pinimg.com/originals/4f/c2/da/4fc2da8f1d4c37d0e97aa7c9252c92ea.gif" alt="ลอยกระทง" class="card-image">
                     <div class="festival-icon">🏮</div>
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
@@ -387,6 +411,7 @@
         <div class="card christmas">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg" alt="คริสต์มาส" class="card-image">
                     <div class="festival-icon">🎄</div>
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
@@ -400,11 +425,11 @@
                 </div>
             </div>
         </div>
-
         <!-- ตรุษจีน -->
         <div class="card chinesenewyear">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg" alt="ตรุษจีน" class="card-image">
                     <div class="festival-icon">🧧</div>
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
@@ -423,6 +448,7 @@
         <div class="card birthday">
             <div class="card-inner">
                 <div class="card-front">
+                    <img src="https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg" alt="วันเกิด" class="card-image">
                     <div class="festival-icon">🎂</div>
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
@@ -443,7 +469,6 @@
         <p>ออกแบบโดย: ทีมไทยการ์ด</p>
         <p>ติดต่อ: contact@thaicard.com</p>
     </footer>
-
     <script>
         // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
@@ -451,7 +476,7 @@
                 // ถ้าคลิกที่ปุ่มส่งหรือรูปภาพในปุ่ม ไม่ต้องพลิกการ์ด
                 if (e.target.classList.contains('send-button') || 
                     e.target.parentElement.classList.contains('send-button') ||
-                    e.target.tagName === 'IMG') {
+                    e.target.tagName === 'I') {
                     return;
                 }
                 
@@ -468,9 +493,7 @@
                     cardInner.style.transform = 'rotateY(0deg)';
                 }
             });
-        });
-        
-        // ฟังก์ชันส่งการ์ดไปยัง Telegram
+        });// ฟังก์ชันส่งการ์ดไปยัง Telegram
         function sendToTelegram(cardType) {
             // ดึงข้อมูลจาก localStorage หรือใช้ค่าเริ่มต้น
             let username = localStorage.getItem('telegram_username') || '';
@@ -555,9 +578,7 @@
                     });
                 }
             });
-        }
-        
-        // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
+        }// ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
         function saveCardAsImage(cardType, cardElement) {
             html2canvas(cardElement).then(canvas => {
                 // สร้าง URL สำหรับรูปภาพ
@@ -599,9 +620,7 @@
             if (shareUrl) {
                 window.open(shareUrl, '_blank');
             }
-        }
-        
-        // ฟังก์ชันแสดงเมนูตัวเลือกการแชร์
+        }// ฟังก์ชันแสดงเมนูตัวเลือกการแชร์
         function showShareOptions(cardType, cardElement) {
             Swal.fire({
                 title: 'แชร์การ์ด ' + cardType,
