@@ -28,6 +28,7 @@
             margin-bottom: 30px;
         }
 
+        /* กำหนดการวางการ์ดและระยะห่าง */
         .card-container {
             display: flex;
             flex-wrap: wrap;
@@ -37,34 +38,34 @@
             padding: 20px 0;
         }
 
+        /* กำหนดขนาดและคุณสมบัติการพลิกของการ์ด */
         .card {
             width: 300px;
             height: 400px;
-            perspective: 1000px;
+            perspective: 1000px; /* เพิ่มมุมมองในการพลิก */
             margin-bottom: 30px;
             position: relative;
+            z-index: 1; /* กำหนด z-index เริ่มต้น */
         }
 
+        /* กำหนดรูปแบบภายในการ์ดและการพลิก */
         .card-inner {
             position: absolute;
             width: 100%;
             height: 100%;
             text-align: center;
             transition: transform 0.8s;
-            transform-style: preserve-3d;
+            transform-style: preserve-3d; /* ทำให้การพลิกเป็น 3D */
             cursor: pointer;
         }
 
-        .card:hover .card-inner {
-            transform: rotateY(180deg);
-        }
-
+        /* กำหนดลักษณะร่วมของด้านหน้าและด้านหลัง */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
             height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden; /* ซ่อนด้านหลังใน Safari */
+            backface-visibility: hidden; /* ซ่อนด้านหลังเมื่อพลิก */
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: flex;
@@ -73,9 +74,9 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-            position: relative;
         }
 
+        /* กำหนดสไตล์ด้านหน้าการ์ด */
         .card-front {
             background-position: center;
             background-size: cover;
@@ -83,10 +84,11 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
+        /* กำหนดสไตล์ด้านหลังการ์ด */
         .card-back {
             background-color: white;
             color: #333;
-            transform: rotateY(180deg);
+            transform: rotateY(180deg); /* พลิกด้านหลังไว้ล่วงหน้า */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -97,6 +99,7 @@
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
         }
 
+        /* สีการ์ดแต่ละประเภท */
         /* สงกรานต์ */
         .songkran .card-front {
             background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
@@ -133,6 +136,7 @@
             background-color: #77A1D3;
         }
 
+        /* สไตล์หัวข้อและข้อความ */
         h1, h2 {
             color: #fff;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -143,11 +147,13 @@
             line-height: 1.5;
         }
 
+        /* ไอคอนของแต่ละเทศกาล */
         .festival-icon {
             font-size: 3rem;
             margin-bottom: 15px;
         }
 
+        /* สไตล์ปุ่มส่งการ์ด */
         .send-button {
             position: absolute;
             bottom: 15px;
@@ -162,6 +168,7 @@
             font-size: 0.9rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            z-index: 2; /* ให้ปุ่มอยู่ด้านหน้าเสมอ */
         }
         
         .send-button:hover {
@@ -169,12 +176,13 @@
             transform: translateY(-2px);
         }
         
-        .send-button img {
+        .send-button img, .send-button i {
             width: 20px;
             height: 20px;
             margin-right: 5px;
         }
         
+        /* สไตล์ส่วนล่างของหน้า */
         .footer {
             width: 100%;
             background-color: rgba(119, 161, 211, 0.8);
@@ -189,6 +197,7 @@
             margin: 5px 0;
         }
         
+        /* สไตล์ฟอร์มในป๊อปอัพ */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -233,9 +242,10 @@
         }
         
         .swal2-confirm {
-            background-color: #0088cc !important;
+            background-color: #E684AE !important;
         }
         
+        /* สไตล์ปุ่มแชร์ */
         .share-btn, .download-btn {
             background-color: #f5f5f5;
             border: 1px solid #ddd;
@@ -258,6 +268,7 @@
             font-size: 12px;
         }
         
+        /* สีปุ่มแชร์ */
         .facebook {
             background-color: #E684AE;
             color: white;
@@ -279,12 +290,13 @@
         }
         
         .download-btn {
-            background-color: #2196F3;
+            background-color: #79CBCA;
             color: white;
             padding: 10px 20px;
             margin-top: 10px;
         }
         
+        /* สไตล์การแสดงผลบนอุปกรณ์ขนาดเล็ก */
         @media (max-width: 768px) {
             .card {
                 width: 280px;
@@ -305,6 +317,11 @@
                 font-size: 14px;
             }
         }
+
+        /* เพิ่มคลาสสำหรับให้การ์ดอยู่ด้านบนเมื่อพลิก */
+        .card-active {
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
@@ -320,7 +337,7 @@
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
                     <button class="send-button" onclick="showShareOptions('สุขสันต์วันสงกรานต์', this.parentElement)">
-                        <img src="https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -338,7 +355,7 @@
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
                     <button class="send-button" onclick="showShareOptions('สวัสดีปีใหม่', this.parentElement)">
-                        <img src="https://s359.kapook.com/r/600/auto/pagebuilder/dcb6a03d-b91d-43fe-bba5-8985ee31ed3a.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -356,7 +373,7 @@
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
                     <button class="send-button" onclick="showShareOptions('สุขสันต์วันลอยกระทง', this.parentElement)">
-                        <img src="https://i.pinimg.com/originals/da/31/0f/da310fb7135456b6d6a8159b6b181543.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -374,7 +391,7 @@
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
                     <button class="send-button" onclick="showShareOptions('Merry Christmas', this.parentElement)">
-                        <img src="https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -392,7 +409,7 @@
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
                     <button class="send-button" onclick="showShareOptions('สุขสันต์วันตรุษจีน', this.parentElement)">
-                        <img src="https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -410,7 +427,7 @@
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
                     <button class="send-button" onclick="showShareOptions('สุขสันต์วันเกิด', this.parentElement)">
-                        <img src="https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg" alt="Share" /> ส่งการ์ดนี้
+                        <i class="fas fa-paper-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -428,29 +445,27 @@
     </footer>
 
     <script>
-        // เพิ่มเอฟเฟกต์การกดที่การ์ด
+        // จัดการการพลิกการ์ด
         document.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // ถ้าคลิกที่ปุ่มส่ง ไม่ต้องพลิกการ์ด
+                // ถ้าคลิกที่ปุ่มส่งหรือรูปภาพในปุ่ม ไม่ต้องพลิกการ์ด
                 if (e.target.classList.contains('send-button') || 
-                    e.target.parentElement.classList.contains('send-button')) {
+                    e.target.parentElement.classList.contains('send-button') ||
+                    e.target.tagName === 'IMG') {
                     return;
                 }
                 
-                // หากพลิกแล้ว ให้พลิกกลับ
+                // สลับสถานะการพลิกของการ์ด
                 const cardInner = card.querySelector('.card-inner');
-                if (cardInner.style.transform === 'rotateY(180deg)') {
-                    cardInner.style.transform = 'rotateY(0deg)';
-                } else {
-                    // ปิดการ์ดอื่นๆ ก่อนเปิดการ์ดนี้
-                    document.querySelectorAll('.card-inner').forEach(otherCard => {
-                        if (otherCard !== cardInner) {
-                            otherCard.style.transform = 'rotateY(0deg)';
-                        }
-                    });
-                    
-                    // เปิดการ์ดนี้
+                const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
+                
+                // ถ้าการ์ดยังไม่ถูกพลิก ให้เลื่อนขึ้นมาด้านบน
+                if (!isFlipped) {
+                    card.classList.add('card-active');
                     cardInner.style.transform = 'rotateY(180deg)';
+                } else {
+                    card.classList.remove('card-active');
+                    cardInner.style.transform = 'rotateY(0deg)';
                 }
             });
         });
@@ -593,25 +608,25 @@
                 html: `
                     <div style="display: flex; justify-content: space-around; gap: 10px; margin-bottom: 20px;">
                         <button class="share-btn facebook" onclick="shareCard('${cardType}', 'facebook')">
-                            <img src="/api/placeholder/24/24" alt="Facebook" />
+                            <i class="fab fa-facebook-f" style="font-size: 24px; color: white;"></i>
                             <span>Facebook</span>
                         </button>
                         <button class="share-btn twitter" onclick="shareCard('${cardType}', 'twitter')">
-                            <img src="/api/placeholder/24/24" alt="Twitter" />
+                            <i class="fab fa-twitter" style="font-size: 24px; color: white;"></i>
                             <span>Twitter</span>
                         </button>
                         <button class="share-btn line" onclick="shareCard('${cardType}', 'line')">
-                            <img src="/api/placeholder/24/24" alt="Line" />
+                            <i class="fab fa-line" style="font-size: 24px; color: white;"></i>
                             <span>Line</span>
                         </button>
                         <button class="share-btn email" onclick="shareCard('${cardType}', 'email')">
-                            <img src="/api/placeholder/24/24" alt="Email" />
+                            <i class="fas fa-envelope" style="font-size: 24px; color: white;"></i>
                             <span>Email</span>
                         </button>
                     </div>
                     <div>
                         <button class="download-btn" onclick="saveCardAsImage('${cardType}', document.querySelector('.${cardType.toLowerCase().replace(/\s+/g, '')} .card-front'))">
-                            <img src="/api/placeholder/20/20" alt="Download" />
+                            <i class="fas fa-download" style="font-size: 20px; color: white;"></i>
                             <span>บันทึกเป็นรูปภาพ</span>
                         </button>
                     </div>
