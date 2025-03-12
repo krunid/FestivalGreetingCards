@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การ์ดอวยพรเทศกาลต่างๆ</title>
+    <!-- ลิงก์ SweetAlert2 CSS และ JS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.7.3/sweetalert2.all.min.js"></script>
+    <!-- ลิงก์ html2canvas สำหรับบันทึกการ์ดเป็นรูปภาพ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body {
+            font-family: 'Prompt', 'Sarabun', sans-serif;
+            background: linear-gradient(to bottom, #E684AE, #79CBCA, #77A1D3);
+            background-attachment: fixed;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1200px;
+            padding: 20px 0;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            perspective: 1000px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .card-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .card-front {
+            background-position: center;
+            background-size: cover;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .card-back {
+            background-color: white;
+            color: #333;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: linear-gradient(315deg, #E684AE 0%, #79CBCA 50%, #77A1D3 100%);
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        /* สงกรานต์ */
+        .songkran .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
+            background-color: #E684AE;
+        }
+
+        /* ปีใหม่ */
+        .newyear .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
+            background-color: #E684AE;
+        }
+
+        /* ลอยกระทง */
+        .loykrathong .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
+            background-color: #79CBCA;
+        }
+
+        /* คริสต์มาส */
+        .christmas .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
+            background-color: #79CBCA;
+        }
+
+        /* ตรุษจีน */
+        .chinesenewyear .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400'); 
+            background-color: #77A1D3;
+        }
+
+        /* วันเกิด */
+        .birthday .card-front {
+            background-image: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url('/api/placeholder/300/400');
+            background-color: #77A1D3;
+        }
+
+        h1, h2 {
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .festival-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .send-button {
+            position: absolute;
+            bottom: 15px;
+            padding: 8px 15px;
+            background-color: #77A1D3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .send-button:hover {
+            background-color: #E684AE;
+            transform: translateY(-2px);
+        }
+        
+        .send-button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        
+        .footer {
+            width: 100%;
+            background-color: rgba(119, 161, 211, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+            border-radius: 10px;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            text-align: left;
+        }
+        
+        .swal2-input, .swal2-textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .swal2-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        /* ปรับแต่ง SweetAlert */
+        .swal2-popup {
+            font-size: 16px;
+            border-radius: 10px;
+        }
+        
+        .swal2-title {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        
+        .swal2-confirm, .swal2-cancel {
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        
+        .swal2-confirm {
+            background-color: #0088cc !important;
+        }
+        
+        .share-btn, .download-btn {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .share-btn:hover, .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .share-btn span, .download-btn span {
+            margin-top: 5px;
+            font-size: 12px;
+        }
+        
+        .facebook {
+            background-color: #E684AE;
+            color: white;
+        }
+        
+        .twitter {
+            background-color: #79CBCA;
+            color: white;
+        }
+        
+        .line {
+            background-color: #77A1D3;
+            color: white;
+        }
+        
+        .email {
+            background-color: #E684AE;
+            color: white;
+        }
+        
+        .download-btn {
+            background-color: #2196F3;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                width: 280px;
+                height: 380px;
+                margin-bottom: 40px;
+            }
+            
+            .card-container {
+                gap: 40px;
+            }
+            
+            .send-button {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .swal2-popup {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>การ์ดอวยพรตามเทศกาลต่างๆ</h1>
+    <p>กดที่การ์ดเพื่อดูข้อความอวยพร</p>
+    
+    <div class="card-container">
+        <!-- สงกรานต์ -->
+        <div class="card songkran">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">💦</div>
+                    <h2>สุขสันต์วันสงกรานต์</h2>
+                    <p>13-15 เมษายน</p>
+                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันสงกรานต์', this.parentElement)">
+                        <img src="https://i.pinimg.com/736x/cf/80/21/cf80211d6addfbdd4cc32cd6f752563b.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>สวัสดีปีใหม่ไทย</h2>
+                    <p>ขออำนาจคุณพระศรีรัตนตรัย และสิ่งศักดิ์สิทธิ์ทั้งหลาย จงดลบันดาลให้ท่านและครอบครัวประสบแต่ความสุข ความเจริญ มีสุขภาพแข็งแรง และโชคดีตลอดปี</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ปีใหม่ -->
+        <div class="card newyear">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">🎆</div>
+                    <h2>สวัสดีปีใหม่</h2>
+                    <p>1 มกราคม</p>
+                    <button class="send-button" onclick="showShareOptions('สวัสดีปีใหม่', this.parentElement)">
+                        <img src="https://s359.kapook.com/r/600/auto/pagebuilder/dcb6a03d-b91d-43fe-bba5-8985ee31ed3a.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>Happy New Year 2025</h2>
+                    <p>ขออวยพรให้ปีใหม่นี้ เป็นปีแห่งความสุข ความสำเร็จ และสิ่งดีๆ เข้ามาในชีวิต พบเจอแต่สิ่งที่ดี มีสุขภาพแข็งแรง และมีความสุขตลอดปี</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ลอยกระทง -->
+        <div class="card loykrathong">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">🏮</div>
+                    <h2>สุขสันต์วันลอยกระทง</h2>
+                    <p>วันเพ็ญเดือน 12</p>
+                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันลอยกระทง', this.parentElement)">
+                        <img src="https://i.pinimg.com/originals/da/31/0f/da310fb7135456b6d6a8159b6b181543.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>ลอยกระทงประเพณีไทย</h2>
+                    <p>ในวันเพ็ญเดือนสิบสองนี้ ขอให้สิ่งไม่ดีลอยไปกับสายน้ำ พบเจอแต่สิ่งดีๆ และความสุขเข้ามาในชีวิต ขอให้ท่านมีความสุขในวันลอยกระทง</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- คริสต์มาส -->
+        <div class="card christmas">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">🎄</div>
+                    <h2>Merry Christmas</h2>
+                    <p>25 ธันวาคม</p>
+                    <button class="send-button" onclick="showShareOptions('Merry Christmas', this.parentElement)">
+                        <img src="https://i.pinimg.com/736x/4f/ce/b1/4fceb1b05177d9ed23885ee7c3576e83.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>สุขสันต์วันคริสต์มาส</h2>
+                    <p>ขอให้คริสต์มาสปีนี้ เป็นวันที่เต็มไปด้วยความสุข ความอบอุ่น และความรัก ขอให้ซานต้านำของขวัญแห่งความสุขมามอบให้ และพบแต่สิ่งดีๆ ในปีใหม่ที่กำลังจะมาถึง</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ตรุษจีน -->
+        <div class="card chinesenewyear">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">🧧</div>
+                    <h2>สุขสันต์วันตรุษจีน</h2>
+                    <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
+                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันตรุษจีน', this.parentElement)">
+                        <img src="https://i.pinimg.com/originals/56/62/4f/56624f2af3fc487440459955760f4e78.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>ซินเจียยู่อี่ ซินนี้ฮวดไช้</h2>
+                    <p>ขอให้มั่งมีศรีสุข รวยเงินรวยทอง สุขภาพแข็งแรง อายุยืนยาว และมีความสุขตลอดปี ขอให้ปีนี้เป็นปีมังกรทองที่นำโชคลาภและความสำเร็จมาสู่ท่าน</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- วันเกิด -->
+        <div class="card birthday">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="festival-icon">🎂</div>
+                    <h2>สุขสันต์วันเกิด</h2>
+                    <p>Happy Birthday</p>
+                    <button class="send-button" onclick="showShareOptions('สุขสันต์วันเกิด', this.parentElement)">
+                        <img src="https://s359.kapook.com/r/600/auto/pagebuilder/8b4f7601-6619-4b48-9865-2427f9f70a03.jpg" alt="Share" /> ส่งการ์ดนี้
+                    </button>
+                </div>
+                <div class="card-back">
+                    <h2>ขอให้วันเกิดเป็นวันพิเศษ</h2>
+                    <p>ขออวยพรให้มีความสุขมากๆ ในวันพิเศษของคุณ ขอให้ชีวิตเต็มไปด้วยความสุข ความสำเร็จ มีสุขภาพแข็งแรง และสมปรารถนาในทุกสิ่งที่หวัง</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2025 การ์ดอวยพรเทศกาลไทย</p>
+        <p>ออกแบบโดย: ทีมไทยการ์ด</p>
+        <p>ติดต่อ: contact@thaicard.com</p>
+    </footer>
+
+    <script>
+        // เพิ่มเอฟเฟกต์การกดที่การ์ด
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // ถ้าคลิกที่ปุ่มส่ง ไม่ต้องพลิกการ์ด
+                if (e.target.classList.contains('send-button') || 
+                    e.target.parentElement.classList.contains('send-button')) {
+                    return;
+                }
+                
+                // หากพลิกแล้ว ให้พลิกกลับ
+                const cardInner = card.querySelector('.card-inner');
+                if (cardInner.style.transform === 'rotateY(180deg)') {
+                    cardInner.style.transform = 'rotateY(0deg)';
+                } else {
+                    // ปิดการ์ดอื่นๆ ก่อนเปิดการ์ดนี้
+                    document.querySelectorAll('.card-inner').forEach(otherCard => {
+                        if (otherCard !== cardInner) {
+                            otherCard.style.transform = 'rotateY(0deg)';
+                        }
+                    });
+                    
+                    // เปิดการ์ดนี้
+                    cardInner.style.transform = 'rotateY(180deg)';
+                }
+            });
+        });
+        
+        // ฟังก์ชันส่งการ์ดไปยัง Telegram
+        function sendToTelegram(cardType) {
+            // ดึงข้อมูลจาก localStorage หรือใช้ค่าเริ่มต้น
+            let username = localStorage.getItem('telegram_username') || '';
+            let recipient = localStorage.getItem('recipient_name') || '';
+            
+            // แสดง Modal สำหรับกรอกข้อมูล
+            Swal.fire({
+                title: 'ส่งการ์ด ' + cardType,
+                html: `
+                    <div class="form-group">
+                        <label for="recipient">ชื่อผู้รับ</label>
+                        <input type="text" id="recipient" class="swal2-input" placeholder="ชื่อผู้รับ" value="${recipient}">
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Telegram Username</label>
+                        <input type="text" id="username" class="swal2-input" placeholder="@username" value="${username}">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ข้อความเพิ่มเติม</label>
+                        <textarea id="message" class="swal2-textarea" placeholder="เขียนข้อความเพิ่มเติม"></textarea>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'ส่งการ์ด',
+                cancelButtonText: 'ยกเลิก',
+                preConfirm: () => {
+                    const recipientValue = document.getElementById('recipient').value;
+                    const usernameValue = document.getElementById('username').value;
+                    const messageValue = document.getElementById('message').value;
+                    
+                    // บันทึกข้อมูลลง localStorage เพื่อใช้ครั้งต่อไป
+                    localStorage.setItem('recipient_name', recipientValue);
+                    localStorage.setItem('telegram_username', usernameValue);
+                    
+                    return { 
+                        recipient: recipientValue,
+                        username: usernameValue,
+                        message: messageValue
+                    };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // ถ้าผู้ใช้กรอก username แต่ไม่มี @ ให้เพิ่มให้
+                    let username = result.value.username;
+                    if (username && !username.startsWith('@')) {
+                        username = '@' + username;
+                    }
+                    
+                    // สร้างข้อความสำหรับส่ง
+                    let textToSend = `สวัสดี${result.value.recipient ? ' คุณ' + result.value.recipient : ''}`;
+                    textToSend += `\n\nฉันส่งการ์ดอวยพร "${cardType}" มาให้คุณ 🎉`;
+                    
+                    if (result.value.message) {
+                        textToSend += `\n\n"${result.value.message}"`;
+                    }
+                    
+                    textToSend += "\n\nส่งจากเว็บไซต์การ์ดอวยพรเทศกาลไทย 🇹🇭";
+                    
+                    // เข้ารหัส URL
+                    const encodedText = encodeURIComponent(textToSend);
+                    
+                    // สร้าง URL สำหรับส่ง
+                    let url;
+                    if (username) {
+                        // ถ้ามี username ให้ส่งตรงไปที่ผู้ใช้
+                        url = `https://t.me/${username.replace('@', '')}?text=${encodedText}`;
+                    } else {
+                        // ถ้าไม่มี username ให้แชร์ผ่าน share URL
+                        url = `https://t.me/share/url?url=${encodeURIComponent(window.location.href)}&text=${encodedText}`;
+                    }
+                    
+                    // เปิดหน้าต่างใหม่
+                    window.open(url, '_blank');
+                    
+                    // แสดง notification ว่าส่งสำเร็จ
+                    Swal.fire({
+                        title: 'ส่งการ์ดสำเร็จ',
+                        text: `การ์ด ${cardType} ถูกส่งไปยัง Telegram แล้ว`,
+                        icon: 'success',
+                        timer: 2000,
+                        showConfirmButton: false
+                    });
+                }
+            });
+        }
+        
+        // ฟังก์ชันบันทึกการ์ดเป็นรูปภาพ
+        function saveCardAsImage(cardType, cardElement) {
+            html2canvas(cardElement).then(canvas => {
+                // สร้าง URL สำหรับรูปภาพ
+                const imgData = canvas.toDataURL('image/png');
+                
+                // สร้างลิงก์ดาวน์โหลด
+                const link = document.createElement('a');
+                link.href = imgData;
+                link.download = `card_${cardType.replace(/\s+/g, '_').toLowerCase()}.png`;
+                
+                // คลิกลิงก์เพื่อดาวน์โหลด
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
+        }
+        
+        // ฟังก์ชันแชร์การ์ดผ่านโซเชียลมีเดีย
+        function shareCard(cardType, platform) {
+            const text = encodeURIComponent(`ฉันส่งการ์ดอวยพร "${cardType}" มาให้คุณ 🎉`);
+            const url = encodeURIComponent(window.location.href);
+            let shareUrl = '';
+            
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
+                    break;
+                case 'twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+                    break;
+                case 'line':
+                    shareUrl = `https://social-plugins.line.me/lineit/share?url=${url}&text=${text}`;
+                    break;
+                case 'email':
+                    shareUrl = `mailto:?subject=${encodeURIComponent('การ์ดอวยพร ' + cardType)}&body=${text}%0A%0A${url}`;
+                    break;
+            }
+            
+            if (shareUrl) {
+                window.open(shareUrl, '_blank');
+            }
+        }
+        
+        // ฟังก์ชันแสดงเมนูตัวเลือกการแชร์
+        function showShareOptions(cardType, cardElement) {
+            Swal.fire({
+                title: 'แชร์การ์ด ' + cardType,
+                html: `
+                    <div style="display: flex; justify-content: space-around; gap: 10px; margin-bottom: 20px;">
+                        <button class="share-btn facebook" onclick="shareCard('${cardType}', 'facebook')">
+                            <img src="/api/placeholder/24/24" alt="Facebook" />
+                            <span>Facebook</span>
+                        </button>
+                        <button class="share-btn twitter" onclick="shareCard('${cardType}', 'twitter')">
+                            <img src="/api/placeholder/24/24" alt="Twitter" />
+                            <span>Twitter</span>
+                        </button>
+                        <button class="share-btn line" onclick="shareCard('${cardType}', 'line')">
+                            <img src="/api/placeholder/24/24" alt="Line" />
+                            <span>Line</span>
+                        </button>
+                        <button class="share-btn email" onclick="shareCard('${cardType}', 'email')">
+                            <img src="/api/placeholder/24/24" alt="Email" />
+                            <span>Email</span>
+                        </button>
+                    </div>
+                    <div>
+                        <button class="download-btn" onclick="saveCardAsImage('${cardType}', document.querySelector('.${cardType.toLowerCase().replace(/\s+/g, '')} .card-front'))">
+                            <img src="/api/placeholder/20/20" alt="Download" />
+                            <span>บันทึกเป็นรูปภาพ</span>
+                        </button>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'ส่งผ่าน Telegram',
+                cancelButtonText: 'ปิด',
+                showCloseButton: true
+            }).then(result => {
+                if (result.isConfirmed) {
+                    sendToTelegram(cardType);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
