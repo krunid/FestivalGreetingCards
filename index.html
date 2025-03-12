@@ -39,7 +39,6 @@
             gap: 30px;
             max-width: 1200px;
             padding: 20px 0;
-            position: relative;
         }
 
         /* กำหนดขนาดและคุณสมบัติการพลิกของการ์ด */
@@ -49,18 +48,22 @@
             perspective: 1000px; /* เพิ่มมุมมองในการพลิก */
             margin-bottom: 30px;
             position: relative;
-            z-index: 1; /* กำหนด z-index เริ่มต้น */
         }
 
         /* กำหนดรูปแบบภายในการ์ดและการพลิก */
         .card-inner {
-            position: absolute;
+            position: relative;
             width: 100%;
             height: 100%;
             text-align: center;
             transition: transform 0.8s;
             transform-style: preserve-3d; /* ทำให้การพลิกเป็น 3D */
             cursor: pointer;
+        }
+
+        /* การพลิกการ์ด */
+        .card-inner.flipped {
+            transform: rotateY(180deg);
         }
 
         /* กำหนดลักษณะร่วมของด้านหน้าและด้านหลัง */
@@ -78,7 +81,9 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
-        }/* กำหนดสไตล์ด้านหน้าการ์ด */
+        }
+
+        /* กำหนดสไตล์ด้านหน้าการ์ด */
         .card-front {
             background-position: center;
             background-size: cover;
@@ -96,7 +101,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4); /* เพิ่มความเข้มของเลเยอร์ */
+            background: rgba(0,0,0,0.4);
             z-index: 0;
         }
 
@@ -108,17 +113,10 @@
 
         /* กำหนดสไตล์ด้านหลังการ์ด */
         .card-back {
-            background-color: white;
-            color: #333;
-            transform: rotateY(180deg); /* พลิกด้านหลังไว้ล่วงหน้า */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 20px;
-            border-radius: 15px;
             background: linear-gradient(315deg, #E684AE 0%, #79CBCA 50%, #77A1D3 100%);
             color: white;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            transform: rotateY(180deg); /* พลิกด้านหลังไว้ล่วงหน้า */
         }
 
         /* เพิ่มสไตล์รูปภาพในการ์ด */
@@ -131,39 +129,9 @@
             object-fit: cover;
             border-radius: 15px;
             z-index: -1;
-            display: block; /* ให้แสดงผลเป็น block */
         }
 
-        /* สีการ์ดแต่ละประเภท */
-        /* สงกรานต์ */
-        .songkran .card-front {
-            background-color: #E684AE;
-        }
-
-        /* ปีใหม่ */
-        .newyear .card-front {
-            background-color: #E684AE;
-        }
-
-        /* ลอยกระทง */
-        .loykrathong .card-front {
-            background-color: #79CBCA;
-        }
-
-        /* คริสต์มาส */
-        .christmas .card-front {
-            background-color: #79CBCA;
-        }
-
-        /* ตรุษจีน */
-        .chinesenewyear .card-front {
-            background-color: #77A1D3;
-        }
-
-        /* วันเกิด */
-        .birthday .card-front {
-            background-color: #77A1D3;
-        }/* สไตล์หัวข้อและข้อความ */
+        /* สไตล์หัวข้อและข้อความ */
         h1, h2 {
             color: #fff;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
@@ -185,7 +153,7 @@
             position: absolute;
             bottom: 15px;
             padding: 8px 15px;
-            background-color: #77A1D3;
+            background-color: #0088cc; /* สีของ Telegram */
             color: white;
             border: none;
             border-radius: 5px;
@@ -195,17 +163,15 @@
             font-size: 0.9rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
-            z-index: 2; /* ให้ปุ่มอยู่ด้านหน้าเสมอ */
+            z-index: 2;
         }
         
         .send-button:hover {
-            background-color: #E684AE;
+            background-color: #006699;
             transform: translateY(-2px);
         }
         
-        .send-button img, .send-button i {
-            width: 20px;
-            height: 20px;
+        .send-button i {
             margin-right: 5px;
         }
         
@@ -222,7 +188,9 @@
         
         .footer p {
             margin: 5px 0;
-        }/* สไตล์ฟอร์มในป๊อปอัพ */
+        }
+        
+        /* สไตล์ฟอร์มในป๊อปอัพ */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -248,54 +216,6 @@
             resize: vertical;
         }
         
-        /* ปรับแต่ง SweetAlert */
-        .swal2-popup {
-            font-size: 16px;
-            border-radius: 10px;
-        }
-        
-        .swal2-title {
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        
-        .swal2-confirm, .swal2-cancel {
-            padding: 10px 20px;
-            font-size: 14px;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-        
-        .swal2-confirm {
-            background-color: #E684AE !important;
-        }
-        
-        /* สไตล์ปุ่มดาวน์โหลด */
-        .download-btn {
-            background-color: #79CBCA;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .download-btn:hover {
-            background-color: #E684AE;
-            transform: translateY(-2px);
-        }
-
-        .download-btn i {
-            margin-right: 5px;
-        }
-        
         /* สไตล์การแสดงผลบนอุปกรณ์ขนาดเล็ก */
         @media (max-width: 768px) {
             .card {
@@ -317,38 +237,6 @@
                 font-size: 14px;
             }
         }
-
-        /* เพิ่มคลาสสำหรับให้การ์ดอยู่ด้านบนเมื่อพลิก */
-        .card-active {
-            z-index: 10;
-        }
-
-        /* สไตล์ของปุ่ม Telegram */
-        .telegram-btn {
-            background-color: #0088cc;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 12px 20px;
-            margin: 10px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        
-        .telegram-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        
-        .telegram-btn i {
-            margin-right: 8px;
-            font-size: 20px;
-        }
     </style>
 </head>
 <body>
@@ -364,8 +252,8 @@
                     <div class="festival-icon">💦</div>
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
-                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันสงกรานต์', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันสงกรานต์', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -383,8 +271,8 @@
                     <div class="festival-icon">🎆</div>
                     <h2>สวัสดีปีใหม่</h2>
                     <p>1 มกราคม</p>
-                    <button class="send-button" onclick="sendToTelegram('สวัสดีปีใหม่', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สวัสดีปีใหม่', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -402,8 +290,8 @@
                     <div class="festival-icon">🏮</div>
                     <h2>สุขสันต์วันลอยกระทง</h2>
                     <p>วันเพ็ญเดือน 12</p>
-                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันลอยกระทง', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันลอยกระทง', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -421,8 +309,8 @@
                     <div class="festival-icon">🎄</div>
                     <h2>Merry Christmas</h2>
                     <p>25 ธันวาคม</p>
-                    <button class="send-button" onclick="sendToTelegram('Merry Christmas', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('Merry Christmas', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -440,8 +328,8 @@
                     <div class="festival-icon">🧧</div>
                     <h2>สุขสันต์วันตรุษจีน</h2>
                     <p>ขึ้น 1 ค่ำ เดือน 1 (จันทรคติจีน)</p>
-                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันตรุษจีน', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันตรุษจีน', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -459,8 +347,8 @@
                     <div class="festival-icon">🎂</div>
                     <h2>สุขสันต์วันเกิด</h2>
                     <p>Happy Birthday</p>
-                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันเกิด', this.parentElement)">
-                        <i class="fab fa-telegram-plane" style="font-size: 20px; margin-right: 5px;"></i> ส่งการ์ดนี้
+                    <button class="send-button" onclick="sendToTelegram('สุขสันต์วันเกิด', this)">
+                        <i class="fab fa-telegram-plane"></i> ส่งการ์ดนี้
                     </button>
                 </div>
                 <div class="card-back">
@@ -488,21 +376,14 @@
                     return;
                 }
                 
-                // สลับสถานะการพลิกของการ์ดโดยไม่เปลี่ยนตำแหน่ง
+                // สลับคลาส flipped เพื่อพลิกการ์ด
                 const cardInner = card.querySelector('.card-inner');
-                const isFlipped = cardInner.style.transform === 'rotateY(180deg)';
-                
-                if (!isFlipped) {
-                    // ไม่เพิ่มคลาส card-active เพื่อไม่ให้การ์ดเลื่อนขึ้นด้านบน
-                    cardInner.style.transform = 'rotateY(180deg)';
-                } else {
-                    cardInner.style.transform = 'rotateY(0deg)';
-                }
+                cardInner.classList.toggle('flipped');
             });
         });
 
         // ฟังก์ชันส่งการ์ดไปยัง Telegram
-        function sendToTelegram(cardType, cardElement) {
+        function sendToTelegram(cardType, buttonElement) {
             // ดึงข้อมูลจาก localStorage หรือใช้ค่าเริ่มต้น
             let chatId = localStorage.getItem('telegram_chat_id') || '';
             let recipient = localStorage.getItem('recipient_name') || '';
@@ -527,6 +408,7 @@
                 showCancelButton: true,
                 confirmButtonText: 'ส่งการ์ด',
                 cancelButtonText: 'ยกเลิก',
+                confirmButtonColor: '#0088cc',
                 preConfirm: () => {
                     const recipientValue = document.getElementById('recipient').value;
                     const chatIdValue = document.getElementById('chat_id').value;
