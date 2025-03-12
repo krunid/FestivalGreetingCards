@@ -122,11 +122,9 @@
             z-index: 0;
         }
 
-        .save-button {
+        .save-button, .copy-button {
             position: absolute;
-            bottom: 15px;
             padding: 8px 15px;
-            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -139,12 +137,31 @@
             z-index: 10;
         }
         
-        .save-button:hover {
-            background-color: #45a049;
+        .save-button {
+            bottom: 15px;
+            left: 15px;
+            background-color: #4CAF50;
+        }
+        
+        .copy-button {
+            bottom: 15px;
+            right: 15px;
+            background-color: #2196F3;
+        }
+        
+        .save-button:hover, .copy-button:hover {
             transform: translateY(-2px);
         }
         
-        .save-button i {
+        .save-button:hover {
+            background-color: #45a049;
+        }
+        
+        .copy-button:hover {
+            background-color: #0b7dda;
+        }
+        
+        .save-button i, .copy-button i {
             margin-right: 5px;
         }
 
@@ -202,7 +219,10 @@
                     <h2>สุขสันต์วันสงกรานต์</h2>
                     <p>13-15 เมษายน</p>
                     <button class="save-button" onclick="saveCardAsImage('สุขสันต์วันสงกรานต์', this)">
-                        <i class="fas fa-download"></i> บันทึกการ์ด
+                        <i class="fas fa-download"></i> บันทึก
+                    </button>
+                    <button class="copy-button" onclick="copyCardToClipboard('สุขสันต์วันสงกรานต์', this)">
+                        <i class="fas fa-copy"></i> คัดลอก
                     </button>
                 </div>
                 <div class="card-back">
